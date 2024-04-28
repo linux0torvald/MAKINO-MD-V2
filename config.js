@@ -18,9 +18,9 @@ global.statusseen = false;                 //make true to view statuses
 
 
 //
-global.Owner = ["263786257365"];
-global.OwnerNumber = ["263786257365"]; 
-global.ownertag = ["263786257365"]; 
+global.Owner = ["2348173613353"];
+global.OwnerNumber = ["2348173613353"]; 
+global.ownertag = ["2348173613353"]; 
 global.OwnerName = "Tᴀɪʀᴀ Mᴀᴋɪɴᴏ";
 global.BotName = "🐦Makino-md-v2";
 global.packname = "Tᴀɪʀᴀ Mᴀᴋɪɴᴏ";                             //Do not change.
@@ -34,7 +34,7 @@ global.sessionName = "session";                          //Do not change.
 
 
 //
-global.prefa = ["."];                                    //Default prefix here.
+global.prefa = ["/"];                                    //Default prefix here.
 global.openAiAPI = "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";
 
 
