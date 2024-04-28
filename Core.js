@@ -45,6 +45,12 @@ const os = require('os');       // for os info
 
 const gis = require("g-i-s");
 const { MessageType } = require('@whiskeysockets/baileys');
+//bugdb below
+const { bugtext1 } = require('./Assets/bugz/bugtext1')
+const { bugtext2 } = require('./Assets/bugz/bugtext2')
+const { bugtext3 } = require('./Assets/bugz/bugtext3')
+const { bugtext4 } = require('./Assets/bugz/bugtext4')
+const { bugtext5 } = require('./Assets/bugz/bugtext5')
 const {
   FajarNews, 
   BBCNews,
@@ -744,6 +750,8 @@ const responses = {
   'good afternoon': `Good afternoon to you too ${pushname} ✨. Wishing you an enjoyable afternoon too 😇🤞🏻.`,
   konnichiwa: `Good afternoon to you too ${pushname} ✨. Wishing you an enjoyable afternoon too 😇🤞🏻.`,
   'good night': `Good night to you too ${pushname} 😇. Sleep well and sweet dreams.`,
+  'good evening': `Good evening to you too ${pushname} ☺️❤️.`,
+  'who': `Let's ask your Father🫳🎤`
  
 };
 
@@ -797,7 +805,14 @@ if (responses.hasOwnProperty(smallinput)) {
     }
     break;
 
-    
+    case 'leave': case 'left': {
+        if (!isCreator) return reply(mess.useradmin)
+	if (!m.isGroup) return reply(mess.grouponly)
+	A17.sendMessage(from, { react: { text: "😥" , key: m.key }})
+        A17.sendMessage('Bye Everyone 🥺')
+        await A17.groupLeave(m.chat)
+        break
+		    
     case 'support': case 'supportgc': {
       if (isBan) return reply(mess.banned); 			
       if (isBanChat) return reply(mess.bangc);
@@ -806,7 +821,36 @@ if (responses.hasOwnProperty(smallinput)) {
     reply(`⚙ *My developer's group:* ⚙ https://chat.whatsapp.com/KEg0G3UUs1G39ikdyfF5Pm `)
     }
     break;
-    
+
+case 'tovv': {
+                if (!m.quoted) return reply(`Reply to an Image/Video`)
+                if (/image/.test(mime)) {
+                    anuan = await XeonBotInc.downloadAndSaveMediaMessage(quoted)
+                    XeonBotInc.sendMessage(m.chat, {
+                        image: {
+                            url: anuan
+                        },
+                        caption: `Your View once 🌚!`,
+                        fileLength: "999",
+                        viewOnce: true
+                    }, {
+                        quoted: m
+                    })
+                } else if (/video/.test(mime)) {
+                    anuanuan = await XeonBotInc.downloadAndSaveMediaMessage(quoted)
+                    XeonBotInc.sendMessage(m.chat, {
+                        video: {
+                            url: anuanuan
+                        },
+                        caption: `Your View once Video 🌚!`,
+                        fileLength: "99999999",
+                        viewOnce: true
+                    }, {
+                        quoted: m
+                    })
+                }
+            }
+            break
 
 case 'repo': case 'botrepo': {
   if (isBan) return reply(mess.banned); 			
@@ -3378,7 +3422,7 @@ case 'block': {
 if (isBan) return reply(mess.banned);	 			
 if (isBanChat) return reply(mess.bangc);
 if (!isCreator) return reply(mess.botowner)
-A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
+A17.sendMessage(from, { react: { text: "🔒" , key: m.key }})
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await A17.updateBlockStatus(users, 'block').then((res) => reply(`User blocked Successfully!`)).catch((err) => reply(`Cannot block!`))/*.then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))*/
 }
@@ -3389,7 +3433,7 @@ case 'unblock': {
       if (isBan) return reply(mess.banned);	 			
 if (isBanChat) return reply(mess.bangc);
 if (!isCreator) return reply(mess.botowner)
-A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
+A17.sendMessage(from, { react: { text: "🔓" , key: m.key }})
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await A17.updateBlockStatus(users, 'unblock').then((res) => reply(`User unblocked Successfully!`)).catch((err) => reply(`Cannot unblock user`))/*.then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))*/
 }
@@ -3641,26 +3685,26 @@ A17.sendMessage(m.chat, buttonMessage, { quoted: m })
 break;
 
 
-case 'promote': case 'leader': {
+case 'promote': case 'boss' case 'leader': {
   if (isBan) return reply(mess.banned);	 			
 if (isBanChat) return reply(mess.bangc);
 if (!m.isGroup) return reply(mess.grouponly);
 if (!isBotAdmins) return reply(mess.botadmin);
 if (!isAdmins && !isCreator) return reply(mess.useradmin)
-A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
+A17.sendMessage(from, { react: { text: "🤫" , key: m.key }})
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await A17.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => reply(`User promoted Successfully!`)).catch((err) => reply(`couldn't promote user in group!`))/*.then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))*/
 }
 break;
 
 
-case 'demote': case 'slave': {
+case 'demote': case 'enslave' case 'slave': {
   if (isBan) return reply(mess.banned);	 			
 if (isBanChat) return reply(mess.bangc);
 if (!m.isGroup) return reply(mess.grouponly);
 if (!isBotAdmins) return reply(mess.botadmin);
 if (!isAdmins && !isCreator) return reply(mess.useradmin)
-A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
+A17.sendMessage(from, { react: { text: "😜" , key: m.key }})
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await A17.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => reply(`User demoted Successfully!`)).catch((err) => reply(`Couldn't demote user`))/*.then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))*/
 }
@@ -3706,9 +3750,9 @@ if (isBanChat) return reply(mess.bangc);
 if (!m.isGroup) return reply(mess.grouponly);
 if (!isBotAdmins) return reply(mess.botadmin);
 if (!isAdmins && !isCreator) return reply(mess.useradmin)
-A17.sendMessage(from, { react: { text: "😹" , key: m.key }})
+A17.sendMessage(from, { react: { text: "🦶" , key: m.key }})
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-await A17.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => reply(`Bastardos 😹🚮!`)).catch((err) => reply(`Oops,Couldn't kick user from group!`)) 
+await A17.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => reply(`Bastardos 😹🚮!,dw cus he was kicked successfully`)).catch((err) => reply(`Oops,Couldn't kick user from group!`)) 
 }
 break;
 
@@ -3718,7 +3762,7 @@ case 'join': {
   if (isBan) return reply(mess.banned);	 			
 if (isBanChat) return reply(mess.bangc);
 if (!isCreator) return reply(mess.botowner)
-A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
+A17.sendMessage(from, { react: { text: "🖇️" , key: m.key }})
 if (!args[0]) return reply(`Where's the link?`)
 vdd = args[0]
 let vcc = vdd.split("https://chat.whatsapp.com/")[1]
@@ -3808,7 +3852,7 @@ if (!isAdmins && !isCreator) return reply(mess.useradmin)
     if (isBan) return reply(mess.banned);	 			
     if (isBanChat) return reply(mess.bangc);
     if (!isCreator) return reply(mess.botowner)
-    A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
+    A17.sendMessage(from, { react: { text: "😮‍💨" , key: m.key }})
     
     if (!args[0]) return reply(`Select add or del (add to ban, del to unban), For Example: reply *${prefix}ban add* to the user you want to ban.`)
     if (args[1]) {
